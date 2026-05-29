@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#FFFFFF">
+
+  <title>
+    {%- if request.page_type == 'index' -%}
+      {{ shop.name }}{% if page_title != blank %} — {{ page_title }}{% endif %}
+    {%- else -%}
+      {{ page_title }}{% if current_tags %} – {{ current_tags | join: ', ' }}{% endif %} — {{ shop.name }}
+    {%- endif -%}
+  </title>
+
+  {%- if page_description -%}
+    <meta name="description" content="{{ page_description | escape }}">
+  {%- endif -%}
+
+  <!-- Canonical -->
+  <link rel="canonical" href="{{ canonical_url }}">
+
+  <!-- OG -->
+  <meta property="og:site_name" content="{{ shop.name }}">
+  <meta property="og:url" content="{{ canonical_url }}">
+  <meta property="og:title" content="{{ page_title }}">
+  {%- if page_description -%}
+    <meta property="og:description" content="{{ page_description | escape }}">
+  {%- endif -%}
+  {%- if page_image -%}
+    <meta property="og:image" content="{{ page_image | image_url: width: 1200 }}">
+    <meta property="og:image:width" content="1200">
+  {%- endif -%}
+
+  <!-- Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap"></noscript>
+
+  <!-- Theme CSS -->
+  {{ 'theme.css' | asset_url | stylesheet_tag }}
+
+  <!-- Shopify content_for_header -->
+  {{ content_for_header }}
+
+  <script>
+    window.Shopify = window.Shopify || {};
+    window.Shopify.currency = { active: '{{ cart.currency.iso_code }}' };
+    window.theme = {
+      shopName: {{ shop.name | json }},
+      locale: {{ request.locale.iso_code | json }},
+      routes: {
+        root: '/',
+        cartUrl: '/cart',
+        cartAddUrl: '/cart/add.js',
+        cartChangeUrl: '/cart/change.js',
+        cartClearUrl: '/cart/clear.js',
+        searchUrl: '/search'
+      }
+    };
+  </script>
+</head>
+
+<body class="page-type--{{ request.page_type }}{% if customer %} customer-logged-in{% endif %}">
+
+  {%- sections 'announcement-bar' -%}
+
+  {%- section 'header' -%}
+
+  <!-- Cart Overlay -->
+  <div class="cart-overlay" data-close-cart aria-hidden="true"></div>
+
+  <!-- Cart Drawer -->
+  {%- section 'cart-drawer' -%}
+
+  <!-- Mobile Nav -->
+  <nav class="mobile-nav" role="navigation" aria-label="Mobile navigation">
+    {%- for link in linklists[section.settings.menu].links -%}
+      <a class="mobile-nav__link" href="{{ link.url }}">{{ link.title }}</a>
+    {%- endfor -%}
+  </nav>
+
+  <main id="MainContent" role="main" tabindex="-1">
+    {{ content_for_layout }}
+  </main>
+
+  {%- section 'footer' -%}
+
+  <!-- Toast notification -->
+  <div class="toast" role="status" aria-live="polite"></div>
+
+  <!-- Theme JS -->
+  <script src="{{ 'theme.js' | asset_url }}" defer></script>
+
+</body>
+</html>

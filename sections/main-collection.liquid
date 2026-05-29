@@ -1,0 +1,89 @@
+<div class="collection-header">
+  <div class="container">
+    <h1>{{ collection.title }}</h1>
+    {%- if collection.description != blank -%}
+      <div class="collection-description">{{ collection.description }}</div>
+    {%- endif -%}
+  </div>
+</div>
+
+<section class="section--sm">
+  <div class="container">
+
+    <div class="collection-toolbar">
+      <p class="collection-count">
+        {{ collection.products_count }}
+        {%- if collection.products_count == 1 -%} item{%- else -%} items{%- endif -%}
+      </p>
+
+      <div class="collection-sort">
+        <label for="CollectionSort" class="visually-hidden">Sort by</label>
+        <select id="CollectionSort" onchange="window.location = this.value;">
+          <option value="{{ collection.url }}?sort_by=manual"{% if collection.sort_by == 'manual' %} selected{% endif %}>Featured</option>
+          <option value="{{ collection.url }}?sort_by=best-selling"{% if collection.sort_by == 'best-selling' %} selected{% endif %}>Best Selling</option>
+          <option value="{{ collection.url }}?sort_by=title-ascending"{% if collection.sort_by == 'title-ascending' %} selected{% endif %}>A–Z</option>
+          <option value="{{ collection.url }}?sort_by=title-descending"{% if collection.sort_by == 'title-descending' %} selected{% endif %}>Z–A</option>
+          <option value="{{ collection.url }}?sort_by=price-ascending"{% if collection.sort_by == 'price-ascending' %} selected{% endif %}>Price: Low to High</option>
+          <option value="{{ collection.url }}?sort_by=price-descending"{% if collection.sort_by == 'price-descending' %} selected{% endif %}>Price: High to Low</option>
+          <option value="{{ collection.url }}?sort_by=created-descending"{% if collection.sort_by == 'created-descending' %} selected{% endif %}>Newest</option>
+        </select>
+      </div>
+    </div>
+
+    {%- paginate collection.products by section.settings.products_per_page -%}
+
+      {%- if collection.products.size > 0 -%}
+        <div class="product-grid">
+          {%- for product in collection.products -%}
+            {%- render 'product-card', product: product, show_vendor: section.settings.show_vendor -%}
+          {%- endfor -%}
+        </div>
+
+        {%- if paginate.pages > 1 -%}
+          <nav class="pagination" aria-label="Pagination" style="display:flex; justify-content:center; gap:0.5rem; margin-top:4rem;">
+            {%- if paginate.previous -%}
+              <a href="{{ paginate.previous.url }}" class="btn btn--secondary" style="padding:0.75rem 1.5rem; font-size:0.8125rem;">← Previous</a>
+            {%- endif -%}
+            <span style="display:flex; align-items:center; font-size:0.875rem; color:#888; padding:0 1rem;">
+              Page {{ paginate.current_page }} of {{ paginate.pages }}
+            </span>
+            {%- if paginate.next -%}
+              <a href="{{ paginate.next.url }}" class="btn btn--secondary" style="padding:0.75rem 1.5rem; font-size:0.8125rem;">Next →</a>
+            {%- endif -%}
+          </nav>
+        {%- endif -%}
+
+      {%- else -%}
+        <div style="text-align:center; padding:5rem 0;">
+          <p style="color:#888; margin-bottom:1.5rem;">No products found in this collection.</p>
+          <a href="{{ routes.root_url }}" class="btn btn--secondary">Continue Shopping</a>
+        </div>
+      {%- endif -%}
+
+    {%- endpaginate -%}
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collection Grid",
+  "settings": [
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "min": 8,
+      "max": 48,
+      "step": 4,
+      "label": "Products per page",
+      "default": 24
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "label": "Show product vendor",
+      "default": false
+    }
+  ]
+}
+{% endschema %}

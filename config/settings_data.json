@@ -1,0 +1,16 @@
+{
+  "current": {
+    "color_background": "#FFFFFF",
+    "color_text": "#111111",
+    "color_accent": "#111111",
+    "color_surface": "#F5F5F5",
+    "color_border": "#EBEBEB",
+    "type_body_size": 16,
+    "heading_letter_spacing": -2,
+    "page_max_width": 1400,
+    "social_instagram_link": "",
+    "social_tiktok_link": "",
+    "social_pinterest_link": "",
+    "social_twitter_link": ""
+  }
+}

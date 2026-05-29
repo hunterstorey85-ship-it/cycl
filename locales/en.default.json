@@ -1,0 +1,72 @@
+{
+  "general": {
+    "password_page": {
+      "login_form_heading": "Enter store using password",
+      "login_form_password_label": "Password",
+      "login_form_password_placeholder": "Your password",
+      "login_form_submit": "Enter",
+      "powered_by_shopify_html": "This shop will be powered by {{ shopify }}"
+    },
+    "meta": {
+      "tags": "Tagged \"{{ tags }}\"",
+      "page": "Page {{ page }}"
+    }
+  },
+  "sections": {
+    "header": {
+      "cart": "Cart",
+      "menu": "Menu",
+      "search": "Search",
+      "account": "Account"
+    }
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Add to Cart",
+      "sold_out": "Sold Out",
+      "unavailable": "Unavailable",
+      "from_price_html": "From {{ price }}",
+      "on_sale_badge": "Sale",
+      "new_badge": "New",
+      "quick_add": "Quick Add",
+      "view_full_details": "View full details"
+    },
+    "facets": {
+      "sort_by_label": "Sort by",
+      "sort_by": {
+        "manual": "Featured",
+        "best_selling": "Best Selling",
+        "title_ascending": "A–Z",
+        "title_descending": "Z–A",
+        "price_ascending": "Price: Low to High",
+        "price_descending": "Price: High to Low",
+        "created_ascending": "Oldest",
+        "created_descending": "Newest"
+      }
+    }
+  },
+  "cart": {
+    "title": "Your Cart",
+    "empty": "Your cart is currently empty.",
+    "general": {
+      "continue_shopping": "Continue shopping",
+      "checkout": "Check out",
+      "empty": "Your cart is empty",
+      "close_cart": "Close cart",
+      "item_count": {
+        "one": "{{ count }} item",
+        "other": "{{ count }} items"
+      }
+    },
+    "items": {
+      "remove_title": "Remove {{ title }}"
+    }
+  },
+  "accessibility": {
+    "skip_to_content": "Skip to content",
+    "close_modal": "Close dialog",
+    "loading": "Loading...",
+    "open_nav": "Open navigation menu",
+    "close_nav": "Close navigation menu"
+  }
+}
