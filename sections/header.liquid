@@ -5,7 +5,7 @@
       {%- for link in linklists[section.settings.menu].links -%}<a class="site-nav__link{% if link.active %} active{% endif %}" href="{{ link.url }}">{{ link.title }}</a>{%- endfor -%}
     </nav>
     <a class="site-header__logo" href="{{ routes.root_url }}">
-      {%- if section.settings.logo != blank -%}{{ section.settings.logo | image_url: width: 240 | image_tag: loading: 'eager', alt: shop.name }}{%- else -%}{{ shop.name }}{%- endif -%}
+      {%- if section.settings.logo != blank -%}{{ section.settings.logo | image_url: width: 240 | image_tag: loading: 'eager', alt: shop.name }}{%- else -%}<img src="{{ 'cycl-logo.svg' | asset_url }}" alt="{{ shop.name }}" width="120" height="120" loading="eager">{%- endif -%}
     </a>
     <div class="site-header__actions">
       {%- if section.settings.show_search -%}<a href="{{ routes.search_url }}" class="header-icon-btn" aria-label="Search"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></a>{%- endif -%}
