@@ -1,7 +1,8 @@
 <footer class="site-footer" role="contentinfo"><div class="container">
   <div class="site-footer__grid">
     <div class="footer-brand">
-      <a href="{{ routes.root_url }}" class="footer-brand__logo">{%- if section.settings.logo != blank -%}{{ section.settings.logo | image_url: width: 160 | image_tag: alt: shop.name, loading: 'lazy' }}{%- else -%}{{ shop.name }}{%- endif -%}</a>
+      {%- assign _logo = sections['header'].settings.logo -%}
+      <a href="{{ routes.root_url }}" class="footer-brand__logo">{%- if _logo != blank -%}{{ _logo | image_url: width: 160 | image_tag: alt: shop.name, loading: 'lazy' }}{%- elsif section.settings.logo != blank -%}{{ section.settings.logo | image_url: width: 160 | image_tag: alt: shop.name, loading: 'lazy' }}{%- else -%}{{ shop.name }}{%- endif -%}</a>
       {%- if section.settings.tagline != blank -%}<p class="footer-brand__tagline">{{ section.settings.tagline | escape }}</p>{%- endif -%}
       <div class="footer-social">
         {%- if section.settings.instagram != blank -%}<a href="{{ section.settings.instagram }}" class="footer-social__link" aria-label="Instagram" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>{%- endif -%}

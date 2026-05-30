@@ -84,18 +84,12 @@
       {%- endif -%}
 
       {%- if section.settings.show_logo_mark -%}
-        <div class="hero__logomark" aria-hidden="true">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 310 80" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-            <!-- C -->
-            <path d="M 58,14 A 32,32 0 1 0 58,66" stroke-width="3"/>
-            <!-- Y -->
-            <path d="M 84,10 L 114,42 L 144,10 M 114,42 L 114,70" stroke-width="3"/>
-            <!-- C -->
-            <path d="M 228,14 A 32,32 0 1 0 228,66" stroke-width="3"/>
-            <!-- L -->
-            <path d="M 252,10 L 252,70 L 305,70" stroke-width="3"/>
-          </svg>
-        </div>
+        {%- assign _logo = sections['header'].settings.logo -%}
+        {%- if _logo != blank -%}
+          <div class="hero__logomark">
+            {{ _logo | image_url: width: 320 | image_tag: alt: shop.name, loading: 'eager', class: 'hero__logomark-img' }}
+          </div>
+        {%- endif -%}
       {%- endif -%}
 
     </div>
