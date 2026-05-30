@@ -1933,6 +1933,199 @@ select:focus-visible,
 /* --- Accordion trigger: mono + arrow --- */
 .accordion__trigger { font-family: var(--mono); }
 
+/* --- Contact Page --- */
+.contact-page { padding: 4rem 0 7rem; }
+
+.contact-page__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3.5rem;
+}
+
+@media (min-width: 900px) {
+  .contact-page__grid {
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: 6rem;
+    align-items: start;
+  }
+}
+
+.contact-page__tag {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1.25rem;
+}
+
+.contact-page__heading {
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  margin-bottom: 1.5rem;
+}
+
+.contact-page__lead,
+.contact-page__rte {
+  font-size: 0.9375rem;
+  line-height: 1.8;
+  color: var(--text-dim);
+  max-width: 38ch;
+}
+
+.contact-page__meta {
+  margin-top: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.contact-page__meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding-left: 1rem;
+  border-left: 1px solid var(--border-hi);
+}
+
+.contact-page__meta-label {
+  font-family: var(--mono);
+  font-size: 0.5625rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.contact-page__meta-value {
+  font-size: 0.875rem;
+  color: var(--text);
+  transition: color 0.15s;
+}
+
+a.contact-page__meta-value:hover { color: var(--accent); }
+
+/* Contact form */
+.contact-page__form-wrap {
+  background: var(--bg-1);
+  border: 1px solid var(--border);
+  padding: 2rem;
+  position: relative;
+}
+
+.contact-page__form-wrap::before,
+.contact-page__form-wrap::after {
+  content: '';
+  position: absolute;
+  width: 16px; height: 16px;
+  border: 1px solid var(--accent);
+  opacity: 0.5;
+  pointer-events: none;
+}
+.contact-page__form-wrap::before {
+  top: -1px; left: -1px;
+  border-right: none; border-bottom: none;
+}
+.contact-page__form-wrap::after {
+  bottom: -1px; right: -1px;
+  border-left: none; border-top: none;
+}
+
+@media (min-width: 768px) {
+  .contact-page__form-wrap { padding: 2.5rem; }
+}
+
+.contact-form__row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+@media (min-width: 560px) {
+  .contact-form__row { grid-template-columns: 1fr 1fr; }
+}
+
+.contact-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.contact-field__label {
+  font-family: var(--mono);
+  font-size: 0.5625rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.contact-field__input {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--border-hi);
+  color: var(--text);
+  padding: 0.75rem 0.875rem;
+  font-size: 0.875rem;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+  width: 100%;
+}
+
+.contact-field__input::placeholder { color: var(--text-muted); }
+
+.contact-field__input:focus {
+  border-color: var(--accent);
+  background: rgba(200,255,0,0.02);
+  box-shadow: 0 0 0 1px var(--accent-dim);
+}
+
+.contact-field__textarea {
+  resize: vertical;
+  min-height: 120px;
+  line-height: 1.6;
+}
+
+.contact-form__submit {
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+.contact-form__success {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--accent);
+  background: var(--accent-dim);
+}
+
+.contact-form__success-mark {
+  color: var(--accent);
+  font-size: 0.625rem;
+  animation: pulse-dot 1.6s ease-in-out infinite;
+}
+
+.contact-form__success p {
+  color: var(--text);
+  font-size: 0.8125rem;
+  margin: 0;
+}
+
+.contact-form__error {
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid rgba(255,80,80,0.4);
+  background: rgba(255,80,80,0.06);
+  font-size: 0.8125rem;
+  color: #ff8888;
+}
+
+.contact-form__error ul { padding-left: 1rem; }
+
 /* --- Reduced motion --- */
 @media (prefers-reduced-motion: reduce) {
   .hero::after,

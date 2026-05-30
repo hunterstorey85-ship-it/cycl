@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-contact",
+      "settings": {
+        "eyebrow": "GET IN TOUCH",
+        "email": "hunterstorey85@gmail.com"
+      }
+    }
+  },
+  "order": ["main"]
+}

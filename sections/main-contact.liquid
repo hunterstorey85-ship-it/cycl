@@ -1,0 +1,109 @@
+<section class="contact-page section"><div class="container">
+  <div class="contact-page__grid">
+
+    <div class="contact-page__intro">
+      <span class="contact-page__tag">// {{ section.settings.eyebrow | default: 'GET IN TOUCH' }}</span>
+      <h1 class="contact-page__heading">{{ page.title | default: 'Contact' }}</h1>
+      {%- if page.content != blank -%}
+        <div class="contact-page__rte rte">{{ page.content }}</div>
+      {%- else -%}
+        <p class="contact-page__lead">{{ section.settings.subtext | default: 'Questions about a drop, an order, or a collab? Send us a transmission — we usually respond within 1–2 business days.' }}</p>
+      {%- endif -%}
+
+      <ul class="contact-page__meta">
+        {%- if section.settings.email != blank -%}
+          <li class="contact-page__meta-item">
+            <span class="contact-page__meta-label">Email</span>
+            <a href="mailto:{{ section.settings.email }}" class="contact-page__meta-value">{{ section.settings.email }}</a>
+          </li>
+        {%- endif -%}
+        {%- if section.settings.location != blank -%}
+          <li class="contact-page__meta-item">
+            <span class="contact-page__meta-label">Based in</span>
+            <span class="contact-page__meta-value">{{ section.settings.location }}</span>
+          </li>
+        {%- endif -%}
+        {%- if section.settings.hours != blank -%}
+          <li class="contact-page__meta-item">
+            <span class="contact-page__meta-label">Hours</span>
+            <span class="contact-page__meta-value">{{ section.settings.hours }}</span>
+          </li>
+        {%- endif -%}
+      </ul>
+    </div>
+
+    <div class="contact-page__form-wrap">
+      {%- form 'contact', id: 'contact-form', class: 'contact-form' -%}
+        {%- if form.posted_successfully? -%}
+          <div class="contact-form__success">
+            <span class="contact-form__success-mark">●</span>
+            <p>Transmission received. We'll be in touch soon.</p>
+          </div>
+        {%- elsif form.errors -%}
+          <div class="contact-form__error">
+            {{ form.errors | default_errors }}
+          </div>
+        {%- endif -%}
+
+        <div class="contact-form__row">
+          <div class="contact-field">
+            <label class="contact-field__label" for="contact-name">Name</label>
+            <input class="contact-field__input" type="text" id="contact-name" name="contact[name]" value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}" required>
+          </div>
+          <div class="contact-field">
+            <label class="contact-field__label" for="contact-email">Email</label>
+            <input class="contact-field__input" type="email" id="contact-email" name="contact[email]" value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}" autocomplete="email" required>
+          </div>
+        </div>
+
+        <div class="contact-field">
+          <label class="contact-field__label" for="contact-subject">Subject</label>
+          <input class="contact-field__input" type="text" id="contact-subject" name="contact[subject]" value="{{ form.subject }}">
+        </div>
+
+        <div class="contact-field">
+          <label class="contact-field__label" for="contact-body">Message</label>
+          <textarea class="contact-field__input contact-field__textarea" id="contact-body" name="contact[body]" rows="6" required>{{ form.body }}</textarea>
+        </div>
+
+        <button type="submit" class="btn btn--primary contact-form__submit">Send Message</button>
+      {%- endform -%}
+    </div>
+
+  </div>
+</div></section>
+
+{% schema %}
+{
+  "name": "Contact Page",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "GET IN TOUCH"
+    },
+    {
+      "type": "textarea",
+      "id": "subtext",
+      "label": "Intro text (shown if page has no content)",
+      "default": "Questions about a drop, an order, or a collab? Send us a transmission — we usually respond within 1–2 business days."
+    },
+    {
+      "type": "text",
+      "id": "email",
+      "label": "Contact email"
+    },
+    {
+      "type": "text",
+      "id": "location",
+      "label": "Location"
+    },
+    {
+      "type": "text",
+      "id": "hours",
+      "label": "Support hours"
+    }
+  ]
+}
+{% endschema %}
