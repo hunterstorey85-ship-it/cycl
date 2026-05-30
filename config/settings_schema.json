@@ -1,1 +1,22 @@
-[]
+[
+  {
+    "name": "Brand",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo image"
+      },
+      {
+        "type": "range",
+        "id": "logo_width",
+        "min": 40,
+        "max": 200,
+        "step": 4,
+        "unit": "px",
+        "label": "Logo width",
+        "default": 120
+      }
+    ]
+  }
+]
