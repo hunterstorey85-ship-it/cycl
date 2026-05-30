@@ -463,6 +463,19 @@ p {
   color: inherit;
 }
 
+/* Hero logo mark */
+.hero__logomark {
+  margin-top: 4rem;
+  width: clamp(120px, 22vw, 220px);
+  color: rgba(255,255,255,0.12);
+}
+
+.hero__logomark svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 /* --- Section Headings --- */
 .section-header {
   display: flex;

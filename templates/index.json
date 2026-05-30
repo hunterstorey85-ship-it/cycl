@@ -23,7 +23,8 @@
       "settings": {
         "overlay_opacity": 25,
         "background_color": "#0f0f0f",
-        "eyebrow": "SS25 Collection",
+        "eyebrow": "New Arrivals",
+        "show_logo_mark": true,
         "heading": "Designed for Everyday Life",
         "subheading": "Minimal essentials crafted from premium materials. Made to last.",
         "button_label": "Shop Now",
