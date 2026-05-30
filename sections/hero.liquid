@@ -79,11 +79,6 @@
         </a>
       {%- endif -%}
 
-      {%- if section.settings.show_logo_mark and settings.logo != blank -%}
-        <div class="hero__logomark">
-          {{ settings.logo | image_url: width: 320 | image_tag: alt: shop.name, loading: 'eager', class: 'hero__logomark-img' }}
-        </div>
-      {%- endif -%}
 
     </div>
   </div>
