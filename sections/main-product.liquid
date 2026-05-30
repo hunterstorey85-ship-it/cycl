@@ -16,7 +16,7 @@
         <div class="product-gallery__main">
           {%- if product.featured_image -%}
             {{
-              current_variant.featured_image | default: product.featured_image
+              product.featured_image
               | image_url: width: 1200
               | image_tag:
                 loading: 'eager',
@@ -78,33 +78,34 @@
           {%- unless product.has_only_default_variant -%}
             {%- for option in product.options_with_values -%}
               <div class="variant-selector" data-option-index="{{ forloop.index0 }}">
+                {%- liquid
+                  if option.name == 'Size'
+                    assign size_order = 'S,M,L,XL,XXL,XXXL,4XL' | split: ','
+                    assign display_values = ''
+                    for s in size_order
+                      if option.values contains s
+                        if display_values == ''
+                          assign display_values = s
+                        else
+                          assign display_values = display_values | append: '|' | append: s
+                        endif
+                      endif
+                    endfor
+                    assign display_values = display_values | split: '|'
+                  else
+                    assign display_values = option.values | sort
+                  endif
+                  assign first_display_value = display_values | first
+                -%}
                 <div class="variant-selector__label">
                   {{ option.name }}
-                  <span id="SelectedOption{{ forloop.index }}">{{ option.selected_value }}</span>
+                  <span id="SelectedOption{{ forloop.index }}">{{ first_display_value }}</span>
                 </div>
                 <div class="variant-selector__options" role="group" aria-label="{{ option.name }}">
-                  {%- liquid
-                    if option.name == 'Size'
-                      assign size_order = 'S,M,L,XL,XXL,XXXL,4XL' | split: ','
-                      assign display_values = ''
-                      for s in size_order
-                        if option.values contains s
-                          if display_values == ''
-                            assign display_values = s
-                          else
-                            assign display_values = display_values | append: '|' | append: s
-                          endif
-                        endif
-                      endfor
-                      assign display_values = display_values | split: '|'
-                    else
-                      assign display_values = option.values | sort
-                    endif
-                  -%}
                   {%- for value in display_values -%}
                     {%- liquid
                       assign is_pressed = false
-                      if option.selected_value == value
+                      if forloop.first
                         assign is_pressed = true
                       endif
                       assign variant_available = false
@@ -122,7 +123,7 @@
                     -%}
                     <button
                       type="button"
-                      class="variant-option{% if option.selected_value == value %} is-selected{% endif %}{% unless variant_available %} is-unavailable{% endunless %}"
+                      class="variant-option{% if forloop.first %} is-selected{% endif %}{% unless variant_available %} is-unavailable{% endunless %}"
                       data-option-position="{{ forloop.parentloop.index }}"
                       data-option-value="{{ value | escape }}"
                       {% if btn_img_src %}data-image-src="{{ btn_img_src }}"{% endif %}
