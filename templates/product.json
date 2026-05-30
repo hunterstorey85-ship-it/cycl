@@ -1,1 +1,27 @@
-{"sections":{"main":{"type":"main-product","settings":{}},"related":{"type":"featured-collection","settings":{"title":"You May Also Like","products_to_show":4,"show_view_all":false}}},"order":["main","related"]}
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "settings": {
+        "show_vendor": false,
+        "show_shipping": true,
+        "shipping_text": "Free shipping on all orders, no minimum. Ships within 3–5 business days.",
+        "show_sizing": true,
+        "sizing_text": "Unisex sizing. If you want an oversized look, size up. Model is 6'0\" and wears a size M.",
+        "show_care": true,
+        "care_text": "Machine wash cold on a gentle cycle. Lay flat to dry. Do not tumble dry or iron over the print."
+      }
+    },
+    "related": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "More Drops",
+        "collection": "frontpage",
+        "products_to_show": 4,
+        "show_view_all": true,
+        "view_all_label": "See All"
+      }
+    }
+  },
+  "order": ["main", "related"]
+}
