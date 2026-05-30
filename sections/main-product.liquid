@@ -90,10 +90,14 @@
                         assign is_pressed = true
                       endif
                       assign variant_available = false
+                      assign btn_img_src = nil
                       for variant in product.variants
                         if variant.option1 == value or variant.option2 == value or variant.option3 == value
                           if variant.available
                             assign variant_available = true
+                          endif
+                          if variant.featured_image != nil and btn_img_src == nil
+                            assign btn_img_src = variant.featured_image | image_url: width: 1200
                           endif
                         endif
                       endfor
@@ -103,6 +107,7 @@
                       class="variant-option{% if option.selected_value == value %} is-selected{% endif %}{% unless variant_available %} is-unavailable{% endunless %}"
                       data-option-position="{{ forloop.parentloop.index }}"
                       data-option-value="{{ value | escape }}"
+                      {% if btn_img_src %}data-image-src="{{ btn_img_src }}"{% endif %}
                       aria-pressed="{{ is_pressed }}"
                       {% unless variant_available %}aria-disabled="true"{% endunless %}
                     >
