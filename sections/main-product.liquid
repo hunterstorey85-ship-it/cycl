@@ -114,7 +114,7 @@
                           if variant.available
                             assign variant_available = true
                           endif
-                          if variant.featured_image != nil and btn_img_src == nil
+                          if option.name != 'Size' and variant.featured_image != nil and btn_img_src == nil
                             assign btn_img_src = variant.featured_image | image_url: width: 1200
                           endif
                         endif
