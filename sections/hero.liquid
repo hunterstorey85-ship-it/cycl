@@ -1,10 +1,6 @@
 <section
   class="hero hero--{{ section.settings.height }}{% unless section.settings.image %} hero--no-image{% endunless %}"
-  style="
-    {%- unless section.settings.image -%}
-      background-color: {{ section.settings.background_color | default: '#0f0f0f' }};
-    {%- endunless -%}
-  "
+  style="background-color: #000000;"
 >
 
   {%- if section.settings.image != blank -%}
