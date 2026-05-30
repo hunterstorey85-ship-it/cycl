@@ -7,11 +7,39 @@
     <h2>{{ section.settings.title | default: collection.title }}</h2>
     {%- if section.settings.show_view_all and collection != blank -%}<a href="{{ collection.url }}" class="section-header__link">{{ section.settings.view_all_label | default: 'View All' }}</a>{%- endif -%}
   </div>
-  {%- if collection == blank or collection.products_count == 0 -%}
-    <div class="product-grid">{%- for i in (1..4) -%}<div class="product-card"><div class="product-card__media">{{ 'product-' | append: i | placeholder_svg_tag: 'placeholder-svg' }}</div><div class="product-card__info"><div class="product-card__title">Product Name</div><div class="product-card__price">$120.00</div></div></div>{%- endfor -%}</div>
+  {%- if collection.products.size > 0 -%}
+    <div class="product-grid">
+      {%- for product in collection.products limit: products_to_show -%}
+        {%- render 'product-card', product: product -%}
+      {%- endfor -%}
+    </div>
+    {%- if section.settings.show_view_all and collection != blank and section.settings.button_below -%}
+      <div style="text-align:center;margin-top:3rem;"><a href="{{ collection.url }}" class="btn btn--secondary">{{ section.settings.view_all_label | default: 'View All' }}</a></div>
+    {%- endif -%}
   {%- else -%}
-    <div class="product-grid">{%- for product in collection.products limit: products_to_show -%}{%- render 'product-card', product: product -%}{%- endfor -%}</div>
+    <div class="product-grid">
+      {%- for i in (1..4) -%}
+        <div class="product-card">
+          <div class="product-card__media">{{ 'product-' | append: i | placeholder_svg_tag: 'placeholder-svg' }}</div>
+          <div class="product-card__info"><div class="product-card__title">Product Name</div><div class="product-card__price">$120.00</div></div>
+        </div>
+      {%- endfor -%}
+    </div>
   {%- endif -%}
-  {%- if section.settings.show_view_all and collection != blank and section.settings.button_below -%}<div style="text-align:center;margin-top:3rem;"><a href="{{ collection.url }}" class="btn btn--secondary">{{ section.settings.view_all_label | default: 'View All' }}</a></div>{%- endif -%}
 </div></section>
-{% schema %}{"name":"Featured Collection","tag":"section","settings":[{"type":"text","id":"title","label":"Section heading","default":"New Arrivals"},{"type":"collection","id":"collection","label":"Collection"},{"type":"range","id":"products_to_show","min":2,"max":12,"step":1,"label":"Products to show","default":8},{"type":"checkbox","id":"show_view_all","label":"Show view all","default":true},{"type":"checkbox","id":"button_below","label":"Show button below grid","default":false},{"type":"text","id":"view_all_label","label":"View all label","default":"View All"}],"presets":[{"name":"Featured Collection"}]}{% endschema %}
+
+{% schema %}
+{
+  "name": "Featured Collection",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Section heading", "default": "New Arrivals" },
+    { "type": "collection", "id": "collection", "label": "Collection" },
+    { "type": "range", "id": "products_to_show", "min": 2, "max": 12, "step": 1, "label": "Products to show", "default": 8 },
+    { "type": "checkbox", "id": "show_view_all", "label": "Show view all", "default": true },
+    { "type": "checkbox", "id": "button_below", "label": "Show button below grid", "default": false },
+    { "type": "text", "id": "view_all_label", "label": "View all label", "default": "View All" }
+  ],
+  "presets": [{ "name": "Featured Collection" }]
+}
+{% endschema %}
