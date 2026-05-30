@@ -15,6 +15,7 @@
   --accent: #C8FF00;
   --accent-dim: rgba(200,255,0,0.12);
   --white: #FFFFFF;
+  --mono: 'JetBrains Mono', 'SF Mono', 'Roboto Mono', ui-monospace, 'Courier New', monospace;
 }
 
 /* --- Reset & Base --- */
@@ -1510,3 +1511,285 @@ p {
 @media (min-width: 1024px) { .hide-mobile { display: flex; } }
 .hide-desktop { display: flex; }
 @media (min-width: 1024px) { .hide-desktop { display: none; } }
+
+/* ============================================================
+   FUTURISTIC DETAIL LAYER
+   ============================================================ */
+
+/* --- Selection & scrollbar --- */
+::selection {
+  background: var(--accent);
+  color: #050505;
+}
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb {
+  background: var(--bg-3);
+  border: 2px solid var(--bg);
+  border-radius: 0;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--accent-dim); }
+
+/* --- Focus ring --- */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+.btn:focus-visible {
+  outline: 1px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* --- Animated scanline sweep on hero --- */
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(200,255,0,0.04) 50%,
+    transparent 100%
+  );
+  background-size: 100% 8px;
+  opacity: 0.4;
+  mix-blend-mode: screen;
+  animation: scanlines 8s linear infinite;
+}
+
+@keyframes scanlines {
+  0% { background-position: 0 -100vh; }
+  100% { background-position: 0 100vh; }
+}
+
+/* Corner ticks framing hero content */
+.hero__content::before,
+.hero__content::after {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border: 1px solid var(--accent);
+  opacity: 0.5;
+  pointer-events: none;
+}
+.hero__content::before {
+  top: 2.5rem;
+  left: 1.25rem;
+  border-right: none;
+  border-bottom: none;
+}
+.hero__content::after {
+  bottom: 2.5rem;
+  right: 1.25rem;
+  border-left: none;
+  border-top: none;
+}
+@media (min-width: 768px) {
+  .hero__content::before { top: 3rem; left: 2.5rem; }
+  .hero__content::after { bottom: 3rem; right: 2.5rem; }
+}
+
+/* Hero eyebrow as a HUD readout */
+.hero__eyebrow {
+  font-family: var(--mono);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.hero__eyebrow::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: var(--accent);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--accent);
+  animation: pulse-dot 1.6s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.35; transform: scale(0.7); }
+}
+
+/* --- Product cards: corner brackets + scan reveal --- */
+.product-card__media::before,
+.product-card__media::after {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  z-index: 3;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+}
+.product-card__media::before {
+  top: 0.5rem;
+  left: 0.5rem;
+  border-top: 1px solid var(--accent);
+  border-left: 1px solid var(--accent);
+  transform: translate(4px, 4px);
+}
+.product-card__media::after {
+  bottom: 0.5rem;
+  right: 0.5rem;
+  border-bottom: 1px solid var(--accent);
+  border-right: 1px solid var(--accent);
+  transform: translate(-4px, -4px);
+}
+.product-card:hover .product-card__media::before,
+.product-card:hover .product-card__media::after {
+  opacity: 0.9;
+  transform: translate(0, 0);
+}
+
+/* Scan sheen sweeping across image on hover */
+.product-card__media {
+  isolation: isolate;
+}
+.product-card__media .product-card__image {
+  position: relative;
+  z-index: 1;
+}
+.product-card__link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(
+    115deg,
+    transparent 40%,
+    rgba(200,255,0,0.12) 50%,
+    transparent 60%
+  );
+  transform: translateX(-120%);
+  transition: transform 0.6s cubic-bezier(0.25, 0, 0, 1);
+  pointer-events: none;
+}
+.product-card:hover .product-card__link::after {
+  transform: translateX(120%);
+}
+
+/* Product card price → mono */
+.product-card__price { font-family: var(--mono); }
+
+/* --- Section header: index marker --- */
+.section-header h2 {
+  position: relative;
+  padding-left: 1.25rem;
+}
+.section-header h2::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.15em;
+  bottom: 0.15em;
+  width: 3px;
+  background: var(--accent);
+  box-shadow: 0 0 12px var(--accent-dim);
+}
+
+/* --- Monospace technical labels throughout --- */
+.product-info__drop-label,
+.product-info__vendor,
+.collection-count,
+.cart-drawer__title,
+.cart-table__head,
+.cart-drawer__subtotal-label,
+.variant-selector__label,
+.footer-col__heading,
+.section-header__link {
+  font-family: var(--mono);
+}
+
+/* Variant label → "▮ key : value" feel */
+.variant-selector__label::before {
+  content: '//';
+  color: var(--accent);
+  opacity: 0.6;
+  margin-right: 0.1rem;
+}
+
+/* --- Price on product page → mono with glow --- */
+.product-info__price { font-family: var(--mono); }
+.product-info__price--current,
+.product-info__price > :first-child {
+  text-shadow: 0 0 18px rgba(200,255,0,0.0);
+}
+
+/* --- Buttons: animated scan sheen --- */
+.btn { position: relative; overflow: hidden; }
+.btn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(
+    100deg,
+    transparent,
+    rgba(255,255,255,0.25),
+    transparent
+  );
+  transform: skewX(-20deg);
+  transition: left 0.5s ease;
+}
+.btn:hover::after { left: 130%; }
+
+/* --- Add-to-cart: full-width with pulse on enabled --- */
+.product-form__add:not(:disabled) {
+  box-shadow: 0 0 0 0 rgba(200,255,0,0.4);
+}
+
+/* --- Variant option: clipped corners --- */
+.variant-option {
+  clip-path: polygon(0 0, calc(100% - 5px) 0, 100% 5px, 100% 100%, 5px 100%, 0 calc(100% - 5px));
+}
+
+/* --- Cart drawer header: status line --- */
+.cart-drawer__title::after {
+  content: ' ● LIVE';
+  color: var(--accent);
+  font-size: 0.5rem;
+  letter-spacing: 0.1em;
+}
+
+/* --- Footer brand: bracketed mono tag --- */
+.footer-brand__tagline {
+  font-family: var(--mono);
+  font-size: 0.6875rem;
+  line-height: 1.8;
+}
+
+/* --- Marquee: subtle accent glow on items --- */
+.marquee-item { color: rgba(255,255,255,0.25); }
+
+/* --- Announcement bar: mono --- */
+.announcement-bar { font-family: var(--mono); }
+
+/* --- Collection sort & count → mono already; add bracket to count --- */
+.collection-count::before {
+  content: '[ ';
+  color: var(--accent);
+}
+.collection-count::after {
+  content: ' ]';
+  color: var(--accent);
+}
+
+/* --- Accordion trigger: mono + arrow --- */
+.accordion__trigger { font-family: var(--mono); }
+
+/* --- Reduced motion --- */
+@media (prefers-reduced-motion: reduce) {
+  .hero::after,
+  .hero__eyebrow::before { animation: none; }
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+  }
+}
