@@ -84,6 +84,10 @@
                 <div class="variant-selector__options" role="group" aria-label="{{ option.name }}">
                   {%- for value in option.values -%}
                     {%- liquid
+                      assign is_pressed = false
+                      if option.selected_value == value
+                        assign is_pressed = true
+                      endif
                       assign variant_available = false
                       for variant in product.variants
                         if variant.option1 == value or variant.option2 == value or variant.option3 == value
@@ -98,7 +102,7 @@
                       class="variant-option{% if option.selected_value == value %} is-selected{% endif %}{% unless variant_available %} is-unavailable{% endunless %}"
                       data-option-position="{{ forloop.parentloop.index }}"
                       data-option-value="{{ value | escape }}"
-                      aria-pressed="{{ option.selected_value == value }}"
+                      aria-pressed="{{ is_pressed }}"
                       {% unless variant_available %}aria-disabled="true"{% endunless %}
                     >
                       {{- value -}}
@@ -141,7 +145,7 @@
               </button>
               <div class="accordion__content" role="region">
                 <div class="accordion__inner">
-                  {{ section.settings.shipping_text | default: 'Free shipping on all orders. Ships within 3–5 business days. Returns accepted within 30 days of delivery.' }}
+                  {{ section.settings.shipping_text | default: 'Free shipping on all orders. Ships within 3-5 business days. Returns accepted within 30 days of delivery.' }}
                 </div>
               </div>
             </div>
@@ -155,7 +159,7 @@
               </button>
               <div class="accordion__content" role="region">
                 <div class="accordion__inner">
-                  {{ section.settings.sizing_text | default: "Unisex sizing. Size up for an oversized look. Model is 6'0\" and wears a size M." }}
+                  {{ section.settings.sizing_text | default: 'Unisex sizing. Size up for an oversized look. Model is 6ft and wears a size M.' }}
                 </div>
               </div>
             </div>
