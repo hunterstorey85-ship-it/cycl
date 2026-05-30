@@ -35,8 +35,29 @@
   {%- section 'header' -%}
   <div class="cart-overlay" data-close-cart aria-hidden="true"></div>
   {%- section 'cart-drawer' -%}
+  <div class="mobile-nav-overlay" data-close-menu aria-hidden="true"></div>
   <nav class="mobile-nav" role="navigation" aria-label="Mobile navigation">
-    {%- for link in linklists['main-menu'].links -%}<a class="mobile-nav__link" href="{{ link.url }}">{{ link.title }}</a>{%- endfor -%}
+    <div class="mobile-nav__top">
+      <span class="mobile-nav__tag">// MENU</span>
+      <button class="mobile-nav__close" data-close-menu aria-label="Close menu" type="button">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="mobile-nav__links">
+      {%- for link in linklists['main-menu'].links -%}
+        <a class="mobile-nav__link" href="{{ link.url }}" style="--i: {{ forloop.index0 }};">
+          <span class="mobile-nav__index">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+          <span class="mobile-nav__text">{{ link.title }}</span>
+          <svg class="mobile-nav__arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      {%- endfor -%}
+    </div>
+    <div class="mobile-nav__footer">
+      {%- if shop.customer_accounts_enabled -%}
+        <a class="mobile-nav__util" href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}">{%- if customer -%}Account{%- else -%}Sign in{%- endif -%}</a>
+      {%- endif -%}
+      <a class="mobile-nav__util" href="{{ routes.search_url }}">Search</a>
+    </div>
   </nav>
   <main id="MainContent" role="main" tabindex="-1">{{ content_for_layout }}</main>
   {%- section 'footer' -%}
