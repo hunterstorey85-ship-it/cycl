@@ -189,6 +189,13 @@
 
 <script>
   document.querySelector('.product-form').dataset.variants = {{ product.variants | json }};
+  window.__variantImgMap = {
+    {%- for variant in product.variants -%}
+      {%- if variant.featured_image -%}
+        {{ variant.id }}: { src: {{ variant.featured_image | image_url: width: 1200 | json }}, id: {{ variant.featured_image.id }} },
+      {%- endif -%}
+    {%- endfor -%}
+  };
 </script>
 
 {% schema %}
