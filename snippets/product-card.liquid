@@ -1,0 +1,22 @@
+{%- liquid
+  assign show_vendor = show_vendor | default: false
+  assign first_variant = product.first_available_variant | default: product.variants.first
+  assign secondary_image = product.images[1]
+  assign on_sale = false
+  if product.compare_at_price > product.price
+    assign on_sale = true
+  endif
+-%}
+<article class="product-card" aria-label="{{ product.title | escape }}">
+  <a href="{{ product.url }}" tabindex="-1" aria-hidden="true"><div class="product-card__media">
+    {%- if product.featured_image -%}{{ product.featured_image | image_url: width: 800 | image_tag: loading: 'lazy', class: 'product-card__image product-card__image--primary', sizes: '(min-width:1024px) 25vw, (min-width:768px) 33vw, 50vw', alt: product.featured_image.alt | default: product.title | escape }}{%- else -%}{{ 'product-1' | placeholder_svg_tag: 'product-card__image product-card__image--primary placeholder-svg' }}{%- endif -%}
+    {%- if secondary_image -%}{{ secondary_image | image_url: width: 800 | image_tag: loading: 'lazy', class: 'product-card__image product-card__image--secondary', sizes: '(min-width:1024px) 25vw, (min-width:768px) 33vw, 50vw', alt: secondary_image.alt | default: product.title | escape }}{%- endif -%}
+    {%- if on_sale -%}<span class="product-card__badge">Sale</span>{%- elsif product.tags contains 'new' or product.tags contains 'New' -%}<span class="product-card__badge">New</span>{%- endif -%}
+    {%- if first_variant and first_variant.available -%}<button class="product-card__quick-add" data-variant-id="{{ first_variant.id }}" type="button">Quick Add</button>{%- elsif product.available == false -%}<span class="product-card__quick-add" style="pointer-events:none;opacity:0.6;">Sold Out</span>{%- endif -%}
+  </div></a>
+  <div class="product-card__info">
+    {%- if show_vendor -%}<div class="product-card__vendor">{{ product.vendor }}</div>{%- endif -%}
+    <a href="{{ product.url }}"><h3 class="product-card__title">{{ product.title | escape }}</h3></a>
+    <div class="product-card__price">{%- if on_sale -%}<span>{{ product.price | money }}</span><span class="product-card__price--compare">{{ product.compare_at_price | money }}</span>{%- else -%}<span>{%- if product.price_varies -%}From {{ product.price_min | money }}{%- else -%}{{ product.price | money }}{%- endif -%}</span>{%- endif -%}</div>
+  </div>
+</article>

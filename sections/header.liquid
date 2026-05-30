@@ -1,0 +1,17 @@
+<header class="site-header" role="banner">
+  <div class="container"><div class="site-header__inner">
+    <button class="menu-toggle hide-desktop" aria-label="Open menu" aria-expanded="false" type="button"><span></span><span></span><span></span></button>
+    <nav class="site-nav hide-mobile" role="navigation">
+      {%- for link in linklists[section.settings.menu].links -%}<a class="site-nav__link{% if link.active %} active{% endif %}" href="{{ link.url }}">{{ link.title }}</a>{%- endfor -%}
+    </nav>
+    <a class="site-header__logo" href="{{ routes.root_url }}">
+      {%- if section.settings.logo != blank -%}{{ section.settings.logo | image_url: width: 240 | image_tag: loading: 'eager', alt: shop.name }}{%- else -%}{{ shop.name }}{%- endif -%}
+    </a>
+    <div class="site-header__actions">
+      {%- if section.settings.show_search -%}<a href="{{ routes.search_url }}" class="header-icon-btn" aria-label="Search"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></a>{%- endif -%}
+      {%- if shop.customer_accounts_enabled -%}<a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="header-icon-btn hide-mobile" aria-label="Account"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></a>{%- endif -%}
+      <button class="header-icon-btn" data-open-cart aria-label="Open cart" type="button">{% render 'icon-cart' %}<span class="cart-count" aria-hidden="true">0</span></button>
+    </div>
+  </div></div>
+</header>
+{% schema %}{"name":"Header","settings":[{"type":"image_picker","id":"logo","label":"Logo image"},{"type":"link_list","id":"menu","label":"Navigation menu","default":"main-menu"},{"type":"checkbox","id":"show_search","label":"Show search icon","default":true}]}{% endschema %}

@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#FFFFFF">
+  <title>{%- if request.page_type == 'index' -%}{{ shop.name }}{%- else -%}{{ page_title }} — {{ shop.name }}{%- endif -%}</title>
+  {%- if page_description -%}<meta name="description" content="{{ page_description | escape }}">{%- endif -%}
+  <link rel="canonical" href="{{ canonical_url }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap"></noscript>
+  {{ 'theme.css' | asset_url | stylesheet_tag }}
+  {{ content_for_header }}
+  <script>window.Shopify=window.Shopify||{};window.Shopify.currency={active:'{{ cart.currency.iso_code }}'};</script>
+</head>
+<body class="page-type--{{ request.page_type }}{% if customer %} customer-logged-in{% endif %}">
+  {%- sections 'announcement-bar' -%}
+  {%- section 'header' -%}
+  <div class="cart-overlay" data-close-cart aria-hidden="true"></div>
+  {%- section 'cart-drawer' -%}
+  <nav class="mobile-nav" role="navigation" aria-label="Mobile navigation">
+    {%- for link in linklists['main-menu'].links -%}<a class="mobile-nav__link" href="{{ link.url }}">{{ link.title }}</a>{%- endfor -%}
+  </nav>
+  <main id="MainContent" role="main" tabindex="-1">{{ content_for_layout }}</main>
+  {%- section 'footer' -%}
+  <div class="toast" role="status" aria-live="polite"></div>
+  <script src="{{ 'theme.js' | asset_url }}" defer></script>
+</body>
+</html>

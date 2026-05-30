@@ -1,0 +1,35 @@
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign product_form_id = 'product-form-' | append: product.id
+-%}
+<section class="product-page"><div class="container"><div class="product-page__grid">
+  <div class="product-gallery">
+    <div class="product-gallery__main">
+      {%- if product.featured_image -%}{{ current_variant.featured_image | default: product.featured_image | image_url: width: 1200 | image_tag: loading: 'eager', fetchpriority: 'high', id: 'ProductMainImage', sizes: '(min-width:768px) 55vw, 100vw', alt: product.title | escape }}{%- else -%}{{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}{%- endif -%}
+    </div>
+    {%- if product.images.size > 1 -%}<div class="product-gallery__thumbs">{%- for image in product.images limit: 5 -%}<button class="product-gallery__thumb{% if forloop.first %} is-active{% endif %}" data-src="{{ image | image_url: width: 1200 }}" data-alt="{{ image.alt | escape }}" type="button">{{ image | image_url: width: 200 | image_tag: loading: 'lazy', alt: image.alt | escape }}</button>{%- endfor -%}</div>{%- endif -%}
+  </div>
+  <div class="product-info">
+    {%- if section.settings.show_vendor -%}<p class="product-info__vendor">{{ product.vendor }}</p>{%- endif -%}
+    <h1 class="product-info__title">{{ product.title }}</h1>
+    <div class="product-info__price">{%- if current_variant.compare_at_price > current_variant.price -%}<span class="product-info__price--compare">{{ current_variant.compare_at_price | money }}</span>{%- endif -%}<span id="ProductPrice">{{ current_variant.price | money }}</span></div>
+    <hr class="product-info__divider">
+    {%- form 'product', product, id: product_form_id, class: 'product-form', data-variants: product.variants_as_json -%}
+      <input type="hidden" name="id" value="{{ current_variant.id }}">
+      {%- unless product.has_only_default_variant -%}
+        {%- for option in product.options_with_values -%}
+          <div class="variant-selector"><div class="variant-selector__label">{{ option.name }} <span>{{ option.selected_value }}</span></div><div class="variant-selector__options">{%- for value in option.values -%}<button type="button" class="variant-option{% if option.selected_value == value %} is-selected{% endif %}" data-option-position="{{ forloop.parentloop.index }}" data-option-value="{{ value | escape }}" aria-pressed="{{ option.selected_value == value }}">{{ value }}</button>{%- endfor -%}</div></div>
+        {%- endfor -%}
+      {%- endunless -%}
+      <button type="submit" name="add" class="btn btn--primary product-form__add" data-default-text="Add to Cart" {% unless current_variant.available %}disabled{% endunless %}>{%- if current_variant.available -%}Add to Cart{%- else -%}Sold Out{%- endif -%}</button>
+    {%- endform -%}
+    {%- if product.description != blank -%}<div class="product-description">{{ product.description }}</div>{%- endif -%}
+    <div class="accordion" style="margin-top:2rem;">
+      {%- if section.settings.show_shipping -%}<div class="accordion__item"><button class="accordion__trigger" type="button" aria-expanded="false"><span>Shipping &amp; Returns</span><span class="accordion__icon">+</span></button><div class="accordion__content"><div class="accordion__inner">{{ section.settings.shipping_text | default: 'Free shipping on orders over $150. Returns within 30 days.' }}</div></div></div>{%- endif -%}
+      {%- if section.settings.show_sizing -%}<div class="accordion__item"><button class="accordion__trigger" type="button" aria-expanded="false"><span>Size Guide</span><span class="accordion__icon">+</span></button><div class="accordion__content"><div class="accordion__inner">{{ section.settings.sizing_text | default: 'Model is 6&apos;1&quot; and wears a size M.' }}</div></div></div>{%- endif -%}
+      {%- if section.settings.show_care -%}<div class="accordion__item"><button class="accordion__trigger" type="button" aria-expanded="false"><span>Care Instructions</span><span class="accordion__icon">+</span></button><div class="accordion__content"><div class="accordion__inner">{{ section.settings.care_text | default: 'Machine wash cold. Lay flat to dry.' }}</div></div></div>{%- endif -%}
+    </div>
+  </div>
+</div></div></section>
+<script>document.querySelector('.product-form').dataset.variants={{ product.variants | json }};</script>
+{% schema %}{"name":"Product Information","settings":[{"type":"checkbox","id":"show_vendor","label":"Show vendor","default":true},{"type":"checkbox","id":"show_shipping","label":"Show shipping & returns","default":true},{"type":"textarea","id":"shipping_text","label":"Shipping text"},{"type":"checkbox","id":"show_sizing","label":"Show size guide","default":true},{"type":"textarea","id":"sizing_text","label":"Size guide text"},{"type":"checkbox","id":"show_care","label":"Show care instructions","default":true},{"type":"textarea","id":"care_text","label":"Care text"}]}{% endschema %}
