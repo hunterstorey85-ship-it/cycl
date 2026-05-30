@@ -248,7 +248,7 @@
 </section>
 
 <script>
-  document.querySelector('.product-form').dataset.variants = {{ product.variants | json }};
+  document.querySelector('.product-form').dataset.variants = JSON.stringify({{ product.variants | json }});
   window.__variantImgMap = {
     {%- for variant in product.variants -%}
       {%- if variant.featured_image -%}
