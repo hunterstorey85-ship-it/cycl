@@ -1,6 +1,42 @@
 {%- liquid
   assign current_variant = product.selected_or_first_available_variant
   assign product_form_id = 'product-form-' | append: product.id
+
+  assign _first_style_val = nil
+  for _opt in product.options_with_values
+    unless _opt.name == 'Size'
+      assign _first_style_val = _opt.values | sort | first
+    endunless
+  endfor
+  assign _size_order = 'S,M,L,XL,XXL,XXXL,4XL' | split: ','
+  assign _first_size_val = nil
+  for _opt in product.options_with_values
+    if _opt.name == 'Size'
+      for _s in _size_order
+        if _opt.values contains _s and _first_size_val == nil
+          assign _first_size_val = _s
+        endif
+      endfor
+    endif
+  endfor
+  assign _found = false
+  for _v in product.variants
+    unless _found
+      assign _style_match = false
+      assign _size_match = false
+      if _first_style_val == nil or _v.option1 == _first_style_val or _v.option2 == _first_style_val or _v.option3 == _first_style_val
+        assign _style_match = true
+      endif
+      if _first_size_val == nil or _v.option1 == _first_size_val or _v.option2 == _first_size_val or _v.option3 == _first_size_val
+        assign _size_match = true
+      endif
+      if _style_match and _size_match
+        assign current_variant = _v
+        assign _found = true
+      endif
+    endunless
+  endfor
+
   assign on_sale = false
   if current_variant.compare_at_price > current_variant.price
     assign on_sale = true
