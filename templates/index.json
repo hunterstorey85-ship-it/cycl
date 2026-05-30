@@ -13,7 +13,7 @@
       "type": "announcement-bar",
       "settings": {
         "show_bar": true,
-        "text": "Free Shipping on All Orders — New Drops Every Week",
+        "text": "Free Shipping on All Orders — New Drops Every Week ✓",
         "link": "",
         "dismissible": true
       }
