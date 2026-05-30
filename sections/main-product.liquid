@@ -38,6 +38,7 @@
                 class="product-gallery__thumb{% if forloop.first %} is-active{% endif %}"
                 data-src="{{ image | image_url: width: 1200 }}"
                 data-alt="{{ image.alt | escape }}"
+                data-image-id="{{ image.id }}"
                 type="button"
                 aria-label="View image {{ forloop.index }}"
               >
