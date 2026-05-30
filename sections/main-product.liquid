@@ -116,7 +116,7 @@
               <div class="variant-selector" data-option-index="{{ forloop.index0 }}">
                 {%- liquid
                   if option.name == 'Size'
-                    assign size_order = 'S,M,L,XL,XXL,XXXL,4XL' | split: ','
+                    assign size_order = 'XS,S,M,L,XL,XXL,XXXL,4XL' | split: ','
                     assign display_values = ''
                     for s in size_order
                       if option.values contains s
