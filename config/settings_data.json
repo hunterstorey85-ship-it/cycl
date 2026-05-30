@@ -1,1 +1,46 @@
-{"current":{"color_background":"#FFFFFF","color_text":"#111111","color_accent":"#111111","color_surface":"#F5F5F5","color_border":"#EBEBEB","page_max_width":1400}}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "current": {
+    "color_background": "#FFFFFF",
+    "color_text": "#111111",
+    "color_accent": "#111111",
+    "color_surface": "#F5F5F5",
+    "color_border": "#EBEBEB",
+    "page_max_width": 1400,
+    "sections": {
+      "header": {
+        "type": "header",
+        "settings": {
+          "logo": "shopify://shop_images/8318D82F-B1DC-4736-A488-CA17317A4606.png",
+          "menu": "main-menu",
+          "show_search": true
+        }
+      },
+      "cart-drawer": {
+        "type": "cart-drawer",
+        "settings": {}
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {
+          "tagline": "Clothing inspired by the culture everyone's watching.",
+          "instagram": "",
+          "tiktok": "",
+          "newsletter_heading": "Stay in the loop",
+          "newsletter_text": "Be first to know when new drops hit.",
+          "email_placeholder": "your@email.com",
+          "subscribe_label": "Subscribe"
+        }
+      }
+    },
+    "content_for_index": []
+  }
+}

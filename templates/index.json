@@ -14,7 +14,7 @@
       "settings": {
         "show_bar": true,
         "text": "Free Shipping on All Orders — New Drops Every Week",
-        "link": "",
+        "link": "shopify://collections/all",
         "dismissible": true
       }
     },
@@ -24,14 +24,16 @@
         "overlay_opacity": 25,
         "background_color": "#0f0f0f",
         "eyebrow": "Drop Culture",
-        "show_logo_mark": true,
         "heading": "Wear What's Trending",
         "subheading": "Limited drops inspired by the movies, shows, and moments everyone's talking about.",
         "button_label": "Shop the Drop",
         "button_link": "/collections/all",
         "button_style": "btn--white",
         "text_color": "#ffffff",
-        "height": "full-height"
+        "show_logo_mark": true,
+        "height": "full-height",
+        "content_position": "bottom-left",
+        "text_alignment": "left"
       }
     },
     "featured-collection-1": {
