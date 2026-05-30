@@ -1,6 +1,4 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080">
-  <rect width="1080" height="1080" fill="#000000"/>
-
   <defs>
     <mask id="reel-mask">
       <rect width="1080" height="1080" fill="black"/>
@@ -13,19 +11,19 @@
   <text x="150" y="638"
         font-family="Impact, 'Arial Black', sans-serif"
         font-size="268"
-        fill="#EFEDE5">CY</text>
+        fill="#111111">CY</text>
 
   <!-- Film reel O -->
-  <rect width="1080" height="1080" fill="#EFEDE5" mask="url(#reel-mask)"/>
+  <rect width="1080" height="1080" fill="#111111" mask="url(#reel-mask)"/>
   <!-- 4 holes -->
-  <circle cx="596" cy="514" r="24" fill="#000000"/>
-  <circle cx="648" cy="514" r="24" fill="#000000"/>
-  <circle cx="596" cy="566" r="24" fill="#000000"/>
-  <circle cx="648" cy="566" r="24" fill="#000000"/>
+  <circle cx="596" cy="514" r="24" fill="#ffffff"/>
+  <circle cx="648" cy="514" r="24" fill="#ffffff"/>
+  <circle cx="596" cy="566" r="24" fill="#ffffff"/>
+  <circle cx="648" cy="566" r="24" fill="#ffffff"/>
 
   <!-- L -->
   <text x="748" y="638"
         font-family="Impact, 'Arial Black', sans-serif"
         font-size="268"
-        fill="#EFEDE5">L</text>
+        fill="#111111">L</text>
 </svg>
