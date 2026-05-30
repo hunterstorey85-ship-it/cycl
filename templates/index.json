@@ -1,1 +1,53 @@
-{"sections":{"announcement":{"type":"announcement-bar","settings":{"show_bar":true,"text":"Free shipping on orders over $150 — Shop New Arrivals","dismissible":true}},"hero":{"type":"hero","settings":{"eyebrow":"SS25 Collection","heading":"Designed for Everyday Life","subheading":"Minimal essentials crafted from premium materials. Made to last.","button_label":"Shop Now","button_link":"/collections/all","button_style":"btn--white","text_color":"#FFFFFF","height":"full-height","overlay_opacity":25}},"featured-collection-1":{"type":"featured-collection","settings":{"title":"New Arrivals","products_to_show":8,"show_view_all":true,"view_all_label":"View All"}}},"order":["announcement","hero","featured-collection-1"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "announcement": {
+      "type": "announcement-bar",
+      "settings": {
+        "show_bar": true,
+        "text": "Free shipping on orders over $150 — Shop New Arrivals",
+        "link": "",
+        "dismissible": true
+      }
+    },
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "overlay_opacity": 25,
+        "background_color": "#f5f5f5",
+        "eyebrow": "SS25 Collection",
+        "heading": "Designed for Everyday Life",
+        "subheading": "Minimal essentials crafted from premium materials. Made to last.",
+        "button_label": "Shop Now",
+        "button_link": "/collections/all",
+        "button_style": "btn--white",
+        "text_color": "#ffffff",
+        "height": "full-height"
+      }
+    },
+    "featured-collection-1": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "New Arrivals",
+        "collection": "frontpage",
+        "products_to_show": 8,
+        "show_view_all": true,
+        "button_below": false,
+        "view_all_label": "View All"
+      }
+    }
+  },
+  "order": [
+    "announcement",
+    "hero",
+    "featured-collection-1"
+  ]
+}
