@@ -1,0 +1,16 @@
+<section class="legal-page section"><div class="container">
+  <div class="legal-page__inner">
+    <header class="legal-page__header">
+      <span class="legal-page__tag">// LEGAL</span>
+      <h1 class="legal-page__title">{{ policy.title }}</h1>
+    </header>
+    <div class="legal-page__body rte">
+      {{ policy.body }}
+    </div>
+    <div class="legal-page__footer">
+      <a href="{{ routes.root_url }}" class="legal-page__back">&larr; Back to store</a>
+      <a href="{{ routes.root_url }}pages/contact" class="legal-page__back">Questions? Contact us</a>
+    </div>
+  </div>
+</div></section>
+{% schema %}{"name":"Policy","settings":[]}{% endschema %}

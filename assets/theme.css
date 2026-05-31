@@ -2151,6 +2151,92 @@ a.contact-page__meta-value:hover { color: var(--accent); }
 
 .contact-form__error ul { padding-left: 1rem; }
 
+/* --- Rich Text (RTE) shared --- */
+.rte { color: var(--text-dim); font-size: 0.9375rem; line-height: 1.8; }
+.rte > *:first-child { margin-top: 0; }
+.rte h1, .rte h2, .rte h3, .rte h4 {
+  color: var(--text);
+  margin: 2.25rem 0 0.875rem;
+  letter-spacing: -0.01em;
+}
+.rte h2 { font-size: 1.125rem; font-weight: 600; }
+.rte h3 { font-size: 0.9375rem; font-weight: 600; letter-spacing: 0.02em; text-transform: uppercase; color: var(--text); }
+.rte h4 { font-size: 0.875rem; font-weight: 600; }
+.rte p { margin: 0 0 1rem; color: var(--text-dim); }
+.rte a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+.rte a:hover { opacity: 0.8; }
+.rte ul, .rte ol { margin: 0 0 1.25rem; padding-left: 1.25rem; }
+.rte ul { list-style: none; padding-left: 0; }
+.rte ul li {
+  position: relative;
+  padding-left: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-dim);
+}
+.rte ul li::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0.6em;
+  width: 5px; height: 5px;
+  background: var(--accent);
+}
+.rte ol li { margin-bottom: 0.5rem; color: var(--text-dim); }
+.rte strong { color: var(--text); font-weight: 600; }
+.rte em { color: var(--text-muted); }
+
+/* --- Legal / Policy Page --- */
+.legal-page { padding: 4rem 0 7rem; }
+
+.legal-page__inner {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.legal-page__header {
+  margin-bottom: 2.5rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.legal-page__tag {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+
+.legal-page__title {
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+
+.legal-page__footer {
+  margin-top: 3.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem 2.5rem;
+  justify-content: space-between;
+}
+
+.legal-page__back {
+  font-family: var(--mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  transition: color 0.15s;
+}
+
+.legal-page__back:hover { color: var(--accent); }
+
 /* --- Reduced motion --- */
 @media (prefers-reduced-motion: reduce) {
   .hero::after,
