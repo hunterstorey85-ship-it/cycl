@@ -41,7 +41,7 @@
       "settings": {
         "title": "What's Trending",
         "collection": "frontpage",
-        "products_to_show": 8,
+        "products_to_show": 12,
         "show_view_all": true,
         "button_below": false,
         "view_all_label": "View All"

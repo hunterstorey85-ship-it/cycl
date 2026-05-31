@@ -3,10 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#FFFFFF">
-  <title>{%- if request.page_type == 'index' -%}{{ shop.name }}{%- else -%}{{ page_title }} — {{ shop.name }}{%- endif -%}</title>
-  {%- if page_description -%}<meta name="description" content="{{ page_description | escape }}">{%- endif -%}
+  <meta name="theme-color" content="#050505">
+  <title>{%- if request.page_type == 'index' -%}{{ shop.name }} — {{ shop.description | default: 'Graphic tees inspired by the culture everyone is watching' }}{%- else -%}{{ page_title }} — {{ shop.name }}{%- endif -%}</title>
+  {%- if page_description -%}<meta name="description" content="{{ page_description | escape }}">{%- elsif request.page_type == 'index' -%}<meta name="description" content="{{ shop.description | default: 'CYCL — limited-run graphic tees inspired by the movies, shows, and moments everyone is talking about. Free shipping on every order.' | escape }}">{%- endif -%}
   <link rel="canonical" href="{{ canonical_url }}">
+
+  {%- comment -%} Open Graph / social sharing {%- endcomment -%}
+  <meta property="og:site_name" content="{{ shop.name }}">
+  <meta property="og:type" content="{% if request.page_type == 'product' %}product{% else %}website{% endif %}">
+  <meta property="og:title" content="{% if request.page_type == 'index' %}{{ shop.name }}{% else %}{{ page_title }}{% endif %}">
+  <meta property="og:url" content="{{ canonical_url }}">
+  {%- if page_description -%}<meta property="og:description" content="{{ page_description | escape }}">{%- endif -%}
+  {%- if request.page_type == 'product' and product.featured_image -%}
+    <meta property="og:image" content="https:{{ product.featured_image | image_url: width: 1200 }}">
+  {%- elsif page_image -%}
+    <meta property="og:image" content="https:{{ page_image | image_url: width: 1200 }}">
+  {%- endif -%}
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{% if request.page_type == 'index' %}{{ shop.name }}{% else %}{{ page_title }}{% endif %}">
+  {%- if page_description -%}<meta name="twitter:description" content="{{ page_description | escape }}">{%- endif -%}
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" media="print" onload="this.media='all'">
